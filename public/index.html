@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Davao Oriental State University</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="build/css/tailwind.css" />
+    <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+  </head>
+  <body class="{ 'translate-x-0 -translate-y-px  bg-white text-primary-dark': !isDark, 'translate-x-6 text-primary-100 bg-primary-darker': isDark }">
+    <div x-data="setup()" x-init="$refs.loading.classList.add('hidden'); setColors(color);" :class="{ 'dark': isDark}">
+      <div class="flex h-screen antialiased text-gray-900 bg-gray-100 dark:bg-dark dark:text-light">
+        <!-- Loading screen -->
+        <div
+          x-ref="loading"
+          class="fixed inset-0 z-50 flex items-center justify-center text-2xl font-semibold text-white bg-primary-darker"
+        >
+          Loading.....
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="flex-shrink-0 hidden w-64 bg-white border-r dark:border-primary-darker dark:bg-darker md:block">
+          <div class="flex flex-col h-full">
+            <img src="build/images/back.jpg" style="border-radius: 50%; width: 300px; height: 245px;">
+            <!-- Sidebar links -->
+            <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
+              <!-- Dashboards links -->
+              <div x-data="{ isActive: false, open: false}">
+                <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
+                <a
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
+                  :class="{'bg-primary-100 dark:bg-primary': isActive || open}"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> Home </span>
+                  <span class="ml-auto" aria-hidden="true">
+                    <!-- active class 'rotate-180' -->
+                  </span>
+                </a>
+              <!-- Components links -->
+              <div x-data="{ isActive: false, open: false }">
+                <!-- active classes 'bg-primary-100 dark:bg-primary' -->
+                <a
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
+                  :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> About </span>
+                  <span aria-hidden="true" class="ml-auto">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </a>
+                <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    History
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Vision, Mission, Goals, Values
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    Administration
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    Board of Regents
+                  </a>
+                </div>
+              </div>
+
+              <div x-data="{ isActive: false, open: false }">
+                <!-- active classes 'bg-primary-100 dark:bg-primary' -->
+                <a
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
+                  :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> Academics </span>
+                  <span aria-hidden="true" class="ml-auto">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </a>
+                <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Academic Units
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Extension Campus
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    Graduate School
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    University Registrar
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    Pre-school
+                  </a>
+                </div>
+              </div>
+              <div x-data="{ isActive: false, open: false }">
+                <!-- active classes 'bg-primary-100 dark:bg-primary' -->
+                <a
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
+                  :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> Research </span>
+                  <span aria-hidden="true" class="ml-auto">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </a>
+                <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Researches
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Extension Programs
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    Davao Research Journal
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    IPTBM
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    International Relations
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    Linkages
+                  </a>
+                </div>
+              </div>
+              <div x-data="{ isActive: false, open: false }">
+                <!-- active classes 'bg-primary-100 dark:bg-primary' -->
+                <a
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
+                  :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> Students </span>
+                  <span aria-hidden="true" class="ml-auto">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </a>
+                <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Student Services
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    USC
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    Student Publication
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+                  >
+                    ULIRC
+                  </a>
+                </div>
+              </div>
+              <div x-data="{ isActive: false, open: false }">
+                <!-- active classes 'bg-primary-100 dark:bg-primary' -->
+                <a
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
+                  :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> Resource </span>
+                  <span aria-hidden="true" class="ml-auto">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </a>
+                <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Alumni Tracer
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Grades Portal
+                  </a>
+                </div>
+              </div>
+              <div x-data="{ isActive: false, open: false }">
+                <!-- active classes 'bg-primary-100 dark:bg-primary' -->
+                <a
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
+                  :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> Admissions </span>
+                  <span aria-hidden="true" class="ml-auto">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </a>
+                <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Admission Requirements
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Scholarships (FASST)
+                  </a>
+                </div>
+              </div>
+              <div x-data="{ isActive: false, open: false }">
+                <!-- active classes 'bg-primary-100 dark:bg-primary' -->
+                <a
+                  href="#"
+                  @click="$event.preventDefault(); open = !open"
+                  class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary"
+                  :class="{ 'bg-primary-100 dark:bg-primary': isActive || open }"
+                  role="button"
+                  aria-haspopup="true"
+                  :aria-expanded="(open || isActive) ? 'true' : 'false'"
+                >
+                  <span aria-hidden="true">
+                    <svg
+                      class="w-5 h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="ml-2 text-sm"> Grade Inquiry </span>
+                  <span aria-hidden="true" class="ml-auto">
+                    <!-- active class 'rotate-180' -->
+                    <svg
+                      class="w-4 h-4 transition-transform transform"
+                      :class="{ 'rotate-180': open }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </a>
+                <div x-show="open" class="mt-2 space-y-2 px-7" role="menu" arial-label="Components">
+                  <!-- active & hover classes 'text-gray-700 dark:text-light' -->
+                  <!-- inActive classes 'text-gray-400 dark:text-gray-400' -->
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Grade Inquiry 2
+                  </a>
+                  <a
+                    href="#"
+                    role="menuitem"
+                    class="block p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                  >
+                    Grade Inquiry 3
+                  </a>
+                </div>
+              </div>
+            </nav>
+
+            <!-- Sidebar footer -->
+          </div>
+        </aside>
+
+        <div>
+          <!-- Navbar -->
+          <header class="relative bg-white dark:bg-darker">
+            <div class="flex items-center justify-between p-2 border-b dark:border-primary-darker">
+              <!-- Mobile menu button -->
+              <button
+                @click="isMobileMainMenuOpen = !isMobileMainMenuOpen"
+                class="p-1 transition-colors duration-200 rounded-md text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark md:hidden focus:outline-none focus:ring"
+              >
+                <span class="sr-only">Open main menu</span>
+                <span aria-hidden="true">
+                  <svg
+                    class="w-8 h-8"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </span>
+              </button>
+
+              <!-- Brand -->
+              <a 
+                href="index.html"
+                class="inline-block text-2xl font-bold tracking-wider uppercase text-primary-dark dark:text-light"
+              >
+               <img src="build/images/logo2.png" style="width: 750px;">              
+              </a>
+              <!-- Mobile sub menu button -->
+              <button
+                @click="isMobileSubMenuOpen = !isMobileSubMenuOpen"
+                class="p-1 transition-colors duration-200 rounded-md text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark md:hidden focus:outline-none focus:ring"
+              >
+                <span class="sr-only">Open sub menu</span>
+                <span aria-hidden="true">
+                  <svg
+                    class="w-8 h-8"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                    />
+                  </svg>
+                </span>
+              </button>
+
+              <!-- Desktop Right buttons -->
+              <nav aria-label="Secondary" class="hidden space-x-2 md:flex md:items-center">
+                <!-- Toggle dark theme button -->
+                <button aria-hidden="true" class="relative focus:outline-none" x-cloak @click="toggleTheme">
+                  <div
+                    class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-lighter"
+                  ></div>
+                  <div
+                    class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-150 transform scale-110 rounded-full shadow-sm"
+                    :class="{ 'translate-x-0 -translate-y-px  bg-white text-primary-dark': !isDark, 'translate-x-6 text-primary-100 bg-primary-darker': isDark }"
+                  >
+                    <svg
+                      x-show="!isDark"
+                      class="w-4 h-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                      />
+                    </svg>
+                    <svg
+                      x-show="isDark"
+                      class="w-4 h-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                      />
+                    </svg>
+                  </div>
+                </button>
+
+                <!-- Search button -->
+                <button
+                  @click="openSearchPanel"
+                  class="p-2 transition-colors duration-200 rounded-full text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker"
+                >
+                  <span class="sr-only">Open search panel</span>
+                  <svg
+                    class="w-7 h-7"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </button>
+              </nav>
+
+              <!-- Mobile sub menu -->
+              <nav
+                x-transition:enter="transition duration-200 ease-in-out transform sm:duration-500"
+                x-transition:enter-start="-translate-y-full opacity-0"
+                x-transition:enter-end="translate-y-0 opacity-100"
+                x-transition:leave="transition duration-300 ease-in-out transform sm:duration-500"
+                x-transition:leave-start="translate-y-0 opacity-100"
+                x-transition:leave-end="-translate-y-full opacity-0"
+                x-show="isMobileSubMenuOpen"
+                @click.away="isMobileSubMenuOpen = false"
+                class="absolute flex items-center p-4 bg-white rounded-md shadow-lg dark:bg-darker top-16 inset-x-4 md:hidden"
+                aria-label="Secondary"
+              >
+                <div class="space-x-2">
+                  <!-- Toggle dark theme button -->
+                  <button aria-hidden="true" class="relative focus:outline-none" x-cloak @click="toggleTheme">
+                    <div
+                      class="w-12 h-6 transition rounded-full outline-none bg-primary-100 dark:bg-primary-lighter"
+                    ></div>
+                    <div
+                      class="absolute top-0 left-0 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 transform scale-110 rounded-full shadow-sm"
+                      :class="{ 'translate-x-0 -translate-y-px  bg-white text-primary-dark': !isDark, 'translate-x-6 text-primary-100 bg-primary-darker': isDark }"
+                    >
+                      <svg
+                        x-show="!isDark"
+                        class="w-4 h-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                        />
+                      </svg>
+                      <svg
+                        x-show="isDark"
+                        class="w-4 h-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+                  <button
+                  @click="openSearchPanel"
+                  class="p-2 transition-colors duration-200 rounded-full text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-dark focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker"
+                >
+                  <span class="sr-only">Open search panel</span>
+                  <svg
+                    class="w-7 h-7"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </button>
+            </div>
+          </header>
+
+          <!-- Main content -->
+          <main >
+            <!-- Content header -->
+            <div class="flex items-center bg-primary-50 justify-between px-4 py-4 border-b lg:py-6 dark:border-primary-darker">
+              <h1 class="text-2xl  font-semibold">News and Events</h1>
+            </div>
+            <!-- Content -->
+         </main>
+          <div class="flex flex-wrap -m-4">
+            <div class="p-4 md:w-1/3">
+        <div class="flex rounded-lg h-full bg-gray-100 dark:bg-gray-500 p-8 flex-col"> 
+          <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1 text-center dark:text-gray-100">SEPTEMBER 18, 2022</h2>
+          <div class="flex items-center mb-3">
+            <h2 class="text-gray-600 text-lg title-font font-bold text-center dark:text-gray dark:font-bold"><a href="#" class="hover:text-gray-400">DOrSU employees trained to respond to emergencies</a></h2>
+          </div>
+          <div class="flex-grow dark:text-white">
+            <p class="leading-relaxed text-base text-gray-600">Selected staff and faculty of Davao Oriental State University(DOrSU) received training from the City Disaster Risk Reduction and Management Office (CDRRMO), City of Mati, to prepare them for emergencies that might arise at work,...</p>
+            <a href="#" class="mt-3 text-gray-500 inline-flex items-center dark:text-gray hover:text-gray-400 dark:hover:text-gray-400 dark:text-gray">Learn More
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 md:w-1/3">
+        <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col dark:bg-gray-500">
+          <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1 text-center dark:text-gray-100">SEPTEMBER 14, 2022</h2>
+            <div class="flex items-center mb-3">
+            <h2 class="text-gray-600 text-lg title-font font-bold text-center dark:text-gray dark:font-bold"><a href="#" class="hover:text-gray-400">US Pediatricians, DOrSU work toward reducing maternal, newborn mortality</a></h2>
+          </div>
+          <div class="flex-grow dark:text-white">
+            <p class="leading-relaxed text-base text-gray-600">Pediatricians from Johns Hopkins University and the Institute of Nursing and Allied Health Sciences (INAHS) conducted a two-day training from September 13 to 14, 2022, at the university library for midwives, nurses, and nursing...</p>
+             <a href="#" class="mt-3 text-gray-500 inline-flex items-center dark:text-gray hover:text-gray-400 dark:hover:text-gray-400 dark:text-gray">Learn More
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 md:w-1/3">
+        <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col dark:bg-gray-500">
+          <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1 text-center dark:text-gray-100">AUGUST 20, 2022</h2>
+            <div class="flex items-center mb-3">
+            <h2 class="text-gray-600 text-lg title-font font-bold text-center dark:text-gray dark:font-bold"><a href="#" class="hover:text-gray-400">DOrSU, CCATI sign MOA for Tech-voc Training, Nat’l Certification Activities</a></h2>
+          </div>
+          <div class="flex-grow dark:text-white">
+            <p class="leading-relaxed text-base text-gray-600">DOrSU President Roy G. Ponce and Career Centre Academie and Technological Institute, Inc. (CCATI)President Ms. Mary Jane P. Trinidad signed a Memorandum of Agreement covering technical vocationaltraining and national certification activities for the Bachelor...</p>
+            <a href="#" class="mt-3 text-gray-500 inline-flex items-center hover:text-gray-400 dark:text-gray dark:hover:text-gray-400">Learn More
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+
+
+        <!-- Backdrop -->
+        <div
+          x-transition:enter="transition duration-300 ease-in-out"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition duration-300 ease-in-out"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+          x-show="isSettingsPanelOpen"
+          @click="isSettingsPanelOpen = false"
+          class="fixed inset-0 z-10 bg-primary-darker"
+          style="opacity: 0.5"
+          aria-hidden="true"
+        ></div>
+        <!-- Panel -->
+
+        <!-- Search panel -->
+        <!-- Backdrop -->
+        <div
+          x-transition:enter="transition duration-300 ease-in-out"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition duration-300 ease-in-out"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+          x-show="isSearchPanelOpen"
+          @click="isSearchPanelOpen = false"
+          class="fixed inset-0 z-10 bg-primary-darker"
+          style="opacity: 0.5"
+          aria-hidden="true"
+        ></div>
+        <!-- Panel -->
+        <section
+          x-transition:enter="transition duration-300 ease-in-out transform sm:duration-500"
+          x-transition:enter-start="-translate-x-full"
+          x-transition:enter-end="translate-x-0"
+          x-transition:leave="transition duration-300 ease-in-out transform sm:duration-500"
+          x-transition:leave-start="translate-x-0"
+          x-transition:leave-end="-translate-x-full"
+          x-show="isSearchPanelOpen"
+          @keydown.escape="isSearchPanelOpen = false"
+          class="fixed inset-y-0 z-20 w-full max-w-xs bg-white shadow-xl dark:bg-darker dark:text-light sm:max-w-md focus:outline-none"
+        >
+          <div class="absolute right-0 p-2 transform translate-x-full">
+            <!-- Close button -->
+            <button @click="isSearchPanelOpen = false" class="p-2 text-white rounded-md focus:outline-none focus:ring">
+              <svg
+                class="w-5 h-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <h2 class="sr-only">Search panel</h2>
+          <!-- Panel content -->
+          <div class="flex flex-col h-screen">
+            <!-- Panel header (Search input) -->
+            <div
+              class="relative flex-shrink-0 px-4 py-8 text-gray-400 border-b dark:border-primary-darker dark:focus-within:text-light focus-within:text-gray-700"
+            >
+              <span class="absolute inset-y-0 inline-flex items-center px-4">
+                <svg
+                  class="w-5 h-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </span>
+              <input
+                x-ref="searchInput"
+                type="text"
+                class="w-full py-2 pl-10 pr-4 border rounded-full dark:bg-dark dark:border-transparent dark:text-light focus:outline-none focus:ring"
+                placeholder="Search..."
+              />
+            </div>
+
+                </a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    <!-- All javascript code in this project for now is just for demo DON'T RELY ON IT  -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
+    <script src="build/js/script.js"></script>
+    <script>
+      const setup = () => {
+        const getTheme = () => {
+          if (window.localStorage.getItem('dark')) {
+            return JSON.parse(window.localStorage.getItem('dark'))
+          }
+
+          return !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        }
+
+        const setTheme = (value) => {
+          window.localStorage.setItem('dark', value)
+        }
+
+        const getColor = () => {
+          if (window.localStorage.getItem('color')) {
+            return window.localStorage.getItem('color')
+          }
+          return 'cyan'
+        }
+
+        const setColors = (color) => {
+          const root = document.documentElement
+          root.style.setProperty('--color-primary', `var(--color-${color})`)
+          root.style.setProperty('--color-primary-50', `var(--color-${color}-50)`)
+          root.style.setProperty('--color-primary-100', `var(--color-${color}-100)`)
+          root.style.setProperty('--color-primary-light', `var(--color-${color}-light)`)
+          root.style.setProperty('--color-primary-lighter', `var(--color-${color}-lighter)`)
+          root.style.setProperty('--color-primary-dark', `var(--color-${color}-dark)`)
+          root.style.setProperty('--color-primary-darker', `var(--color-${color}-darker)`)
+          this.selectedColor = color
+          window.localStorage.setItem('color', color)
+          //
+        }
+
+        const updateBarChart = (on) => {
+          const data = {
+            data: randomData(),
+            backgroundColor: 'rgb(207, 250, 254)',
+          }
+          if (on) {
+            barChart.data.datasets.push(data)
+            barChart.update()
+          } else {
+            barChart.data.datasets.splice(1)
+            barChart.update()
+          }
+        }
+
+        const updateDoughnutChart = (on) => {
+          const data = random()
+          const color = 'rgb(207, 250, 254)'
+          if (on) {
+            doughnutChart.data.labels.unshift('Seb')
+            doughnutChart.data.datasets[0].data.unshift(data)
+            doughnutChart.data.datasets[0].backgroundColor.unshift(color)
+            doughnutChart.update()
+          } else {
+            doughnutChart.data.labels.splice(0, 1)
+            doughnutChart.data.datasets[0].data.splice(0, 1)
+            doughnutChart.data.datasets[0].backgroundColor.splice(0, 1)
+            doughnutChart.update()
+          }
+        }
+
+        const updateLineChart = () => {
+          lineChart.data.datasets[0].data.reverse()
+          lineChart.update()
+        }
+
+        return {
+          loading: true,
+          isDark: getTheme(),
+          toggleTheme() {
+            this.isDark = !this.isDark
+            setTheme(this.isDark)
+          },
+          setLightTheme() {
+            this.isDark = false
+            setTheme(this.isDark)
+          },
+          setDarkTheme() {
+            this.isDark = true
+            setTheme(this.isDark)
+          },
+          color: getColor(),
+          selectedColor: 'cyan',
+          setColors,
+          toggleSidbarMenu() {
+            this.isSidebarOpen = !this.isSidebarOpen
+          },
+          isSettingsPanelOpen: false,
+          openSettingsPanel() {
+            this.isSettingsPanelOpen = true
+            this.$nextTick(() => {
+              this.$refs.settingsPanel.focus()
+            })
+          },
+          isNotificationsPanelOpen: false,
+          openNotificationsPanel() {
+            this.isNotificationsPanelOpen = true
+            this.$nextTick(() => {
+              this.$refs.notificationsPanel.focus()
+            })
+          },
+          isSearchPanelOpen: false,
+          openSearchPanel() {
+            this.isSearchPanelOpen = true
+            this.$nextTick(() => {
+              this.$refs.searchInput.focus()
+            })
+          },
+          isMobileSubMenuOpen: false,
+          openMobileSubMenu() {
+            this.isMobileSubMenuOpen = true
+            this.$nextTick(() => {
+              this.$refs.mobileSubMenu.focus()
+            })
+          },
+          isMobileMainMenuOpen: false,
+          openMobileMainMenu() {
+            this.isMobileMainMenuOpen = true
+            this.$nextTick(() => {
+              this.$refs.mobileMainMenu.focus()
+            })
+          },
+          updateBarChart,
+          updateDoughnutChart,
+          updateLineChart,
+        }
+      }
+    </script>
+  </nav>
+  </body> 
+  <footer>
+  <section class="text-gray-600 body-font">
+  <div class="container px-2 py-5 mx-auto">
+    <div class="text-center mb-20">
+      <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-indigo-600 mb-4 dark:text-white">DAVAO ORIENTAL STATE UNIVERSITY INSTITUTES</h1>
+  </div>
+  <div class="container mx-auto flex px-1 py-1 md:flex-row flex-col items-center">
+    <div class="lg:max-w-xs lg:w-full md:w-1/2 w-1/2 mb-10 md:mb-0">
+      <img class="object-cover object-left rounded" alt="hero" src="build/images/ials.jpg" width="150px">
+    </div>
+    <div class="lg:max-w-xs lg:w-full md:w-1/2 w-1/2 mb-10 md:mb-0">
+      <img class="object-cover object-center rounded" alt="hero" src="build/images/ibpa.jpg" width="150px">
+    </div>
+    <div class="lg:max-w-xs lg:w-full md:w-1/2 w-1/2 mb-10 md:mb-0">
+      <img class="object-cover object-center rounded" alt="hero" src="build/images/ice.jpg" width="150px">
+    </div>
+    <div class="lg:max-w-xs lg:w-full md:w-1/2 w-1/2 mb-10 md:mb-0">
+      <img class="object-cover object-center rounded" alt="hero" src="build/images/iett.jpg" width="150px">
+    </div>
+    <div class="lg:max-w-xs lg:w-full md:w-1/2 w-1/2 mb-10 md:mb-0">
+      <img class="object-cover object-right rounded" alt="hero" src="build/images/inahs.jpg" width="150px">
+    </div>
+  </div>
+</section>  
+    <div class=" bg-blue-500 bg-opacity-50">
+<div class="text-center text-4xl">
+  <a href="" class="fa fa-facebook text-center pt-10 px-5 text-blue-100 " title="Follw us on Facebook" aria-label="Follow us on Facebook"></a>
+  <a href="" class="fa fa-twitter text-center pt-10 px-5 text-blue-100 " title="Follw us on Twitter" aria-label="Follow us on Twitter"></a>
+  <a href="" class="flex justify-center"><img src="build/images/logo2.png" width="500px" class=""></a>
+<hr> <hr>
+</div>
+<br>
+<p class="text-center text-xs">Davao Oriental State University © 2022. All Rights Reserved.</p>
+<br>
+</div>
+  </footer>
+</html>
